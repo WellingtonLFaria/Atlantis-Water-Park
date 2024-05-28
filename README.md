@@ -1,16 +1,21 @@
-# Atlantis Water Park
+# Atividade 1
 
-## Onde estão as atvidades:
+## Como rodar?
 
-Cada atividade está em sua respectiva branch.
+Primeiro é necessário instalar as dependências do projeto:
 
-Branches:
-- atvi
-- atvii
-- atviii
-- atviv
-- atvv
+```bash
+npm i 
+```
 
-A pasta docs a desta branch contém todas as propostas das atividades que estão nas outras branchs.
+Logo em seguida compilar o código typescript:
 
-**As instruções para execução de cada atividade estará no README de sua respectiva branch!**
+```bash
+npx tsc
+```
+
+Para então rodar a aplicação:
+
+```bash
+npm start
+```
