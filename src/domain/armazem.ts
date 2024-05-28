@@ -1,4 +1,5 @@
-import Cliente from "../entities/cliente";
+import Cliente from "../abstraction/cliente";
+
 
 export default class Armazem {
     private static uniqueInstance: Armazem = new Armazem()
