@@ -1,0 +1,1 @@
+console.log(`Bem-vindo(a) ao melhor sistema de gestão de clubes, hotéis e resorts do mundo, o Atlantis Water Park :)`);
