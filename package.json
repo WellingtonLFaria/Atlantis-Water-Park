@@ -1,0 +1,25 @@
+{
+  "name": "atvii",
+  "version": "1.0.0",
+  "description": "Cada atividade está em sua respectiva branch.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "dependencies": {
+    "ansi-regex": "^4.1.1",
+    "prompt-sync": "^4.2.0",
+    "strip-ansi": "^5.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.12.12",
+    "@types/prompt-sync": "^4.2.3",
+    "typescript": "^5.4.5"
+  },
+  "scripts": {
+    "start": "npx tsc && node ./out/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "WellingtonLFaria",
+  "license": "ISC"
+}
