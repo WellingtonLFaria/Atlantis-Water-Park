@@ -1,16 +1,16 @@
 import Cliente from "../entities/cliente";
 
-export default class Storage {
-    private static uniqueInstance: Storage = new Storage()
+export default class Armazem {
+    private static uniqueInstance: Armazem = new Armazem()
     private clientes: Cliente[] = []
 
     private constructor() { }
 
-    static get InstanciaUnica() {
+    static get InstanciaUnica(): Armazem {
         return this.uniqueInstance;
     }
 
-    get Clientes() {
+    get getClientes(): Cliente[] {
         return this.clientes;
     }
 
