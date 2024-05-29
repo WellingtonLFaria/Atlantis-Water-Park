@@ -9,34 +9,39 @@ import ListagemTitulares from "./listagemTitulares";
 
 export default class CadastroClienteDependente extends Processo {
     private titulares: Titular[]
-    
+
     constructor() {
         super()
         this.titulares = Armazem.InstanciaUnica.getTitulares
     }
 
     processar(): void {
-        console.log('Iniciando o cadastro de um novo titular...')
-        let nome = this.entrada.receberTexto('Qual o nome do novo cliente?')
-        let nomeSocial = this.entrada.receberTexto('Qual o nome social do novo cliente?')
-        let dataNascimento = this.entrada.receberData('Qual a data de nascimento?')
-        this.processo = new ListagemTitulares()
-        this.processo.processar()
-        
-        let cliente = new Dependente(nome, nomeSocial, dataNascimento, new Date(), this.titulares[0])
+        if (this.titulares.length === 0) {
+            console.log("Não há titulares cadastrados, por favor cadastre um titular antes de cadastrar um dependente.");
+        } else {
+            console.log('Iniciando o cadastro de um novo titular...')
+            let nome = this.entrada.receberTexto('Qual o nome do novo cliente?')
+            let nomeSocial = this.entrada.receberTexto('Qual o nome social do novo cliente?')
+            let dataNascimento = this.entrada.receberData('Qual a data de nascimento?')
 
-        this.processo = new CadastroTelefones(cliente)
-        this.processo.processar()
+            this.processo = new ListagemTitulares()
+            this.processo.processar()
+            let index = this.entrada.receberNumero("Informe o ID do cliente titular que deseja adicionar o dependente:");
+            let titular = this.titulares[index];
 
-        this.processo = new CadastroEnderecoTitular(cliente)
-        this.processo.processar()
+            let cliente = new Dependente(nome, nomeSocial, dataNascimento, new Date(), titular)
+            titular.getDependentes.push(cliente);
 
-        this.processo = new CadastrarDocumentosCliente(cliente)
-        this.processo.processar()
+            cliente.setTelefones = cliente.getTitular.getTelefones
+            cliente.setEndereco = cliente.getTitular.getEndereco
 
-        let armazem = Armazem.InstanciaUnica
-        armazem.getDependentes.push(cliente)
+            this.processo = new CadastrarDocumentosCliente(cliente)
+            this.processo.processar()
 
-        console.log('Finalizando o cadastro do cliente...')
+            let armazem = Armazem.InstanciaUnica
+            armazem.getDependentes.push(cliente)
+
+            console.log('Finalizando o cadastro do cliente...')
+        }
     }
 }

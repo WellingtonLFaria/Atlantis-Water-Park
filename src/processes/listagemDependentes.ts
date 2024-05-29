@@ -16,7 +16,7 @@ export default class ListagemDependentes extends Processo {
         console.clear()
         console.log('Iniciando a listagem dos clientes dependentes...')
         this.clientes.forEach(cliente => {
-            this.impressor = new ImpressorCliente(cliente)
+            this.impressor = new ImpressorCliente(cliente, this.clientes.indexOf(cliente))
             console.log(this.impressor.imprimir())
         })
     }

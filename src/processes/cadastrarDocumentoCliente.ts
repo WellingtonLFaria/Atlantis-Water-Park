@@ -37,6 +37,7 @@ export default class CadastrarDocumentosCliente extends Processo {
                 break
             default:
                 console.log('Opção não entendida :(')
+                break
         }
     }
 }

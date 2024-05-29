@@ -34,6 +34,7 @@ export default class CadastroTelefones extends Processo {
                     break;
                 default:
                     console.log('Opção não entendida :(')
+                    break;
             }
         }
     }

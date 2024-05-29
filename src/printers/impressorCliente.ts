@@ -5,14 +5,17 @@ import ImpressorEndereco from "./impressorEndereco";
 
 export default class ImpressorCliente implements Impressor {
     private cliente: Cliente;
+    private index: number;
     private impressor!: Impressor;
 
-    constructor(cliente: Cliente) {
+    constructor(cliente: Cliente, index: number) {
         this.cliente = cliente
-
+        this.index = index
     }
+
     imprimir(): string {
         let impressao = `****************************\n`
+            + `| ID: ${this.index}\n`
             + `| Nome: ${this.cliente.getNome}\n`
             + `| Nome social: ${this.cliente.getNomeSocial}\n`
             + `| Data de nascimento: ${this.cliente.getDataNascimento.toLocaleDateString()}\n`

@@ -13,10 +13,15 @@ export default class ListagemTitulares extends Processo {
     }
     processar(): void {
         console.clear()
-        console.log('Iniciando a listagem dos clientes titulares...')
-        this.clientes.forEach(cliente => {
-            this.impressor = new ImpressorCliente(cliente)
-            console.log(this.impressor.imprimir())
-        })
+        if (this.clientes.length === 0) {
+            console.log('Não há titulares cadastrados.')
+            return
+        } else {
+            console.log('Iniciando a listagem dos clientes titulares...')
+            this.clientes.forEach(cliente => {
+                this.impressor = new ImpressorCliente(cliente, this.clientes.indexOf(cliente))
+                console.log(this.impressor.imprimir())
+            })
+        }
     }
 }
