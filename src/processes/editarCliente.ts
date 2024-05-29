@@ -1,5 +1,6 @@
 import Processo from "../abstraction/processo";
 import MenuTipoEditarCliente from "../menus/menuTipoEditarCliente";
+import EditarDependente from "./editarDependente";
 import EditarTitular from "./editarTitular";
 
 export default class EditarCliente extends Processo {
@@ -18,7 +19,8 @@ export default class EditarCliente extends Processo {
                 this.processo.processar();
                 break;
             case 2:
-                // Editar dependente
+                this.processo = new EditarDependente();
+                this.processo.processar();
                 break;
             default:
                 console.log("Opção inválida");
