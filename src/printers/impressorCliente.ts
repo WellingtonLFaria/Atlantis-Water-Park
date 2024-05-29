@@ -1,4 +1,4 @@
-import Cliente from "../entities/cliente";
+import Cliente from "../abstraction/cliente";
 import Impressor from "../interfaces/impressor";
 import ImpressorDocumentos from "./impressorDocumentos";
 import ImpressorEndereco from "./impressorEndereco";
