@@ -3,6 +3,7 @@ import Menu from "./interfaces/Menu";
 import Input from "./io/Input";
 import MainMenu from "./menus/MainMenu";
 import CadastrarCliente from "./processes/CadastrarCliente";
+import EditarCliente from "./processes/EditarCliente";
 import ExcluirCliente from "./processes/ExcluirCliente";
 import ListarCliente from "./processes/ListarCliente";
 
@@ -26,7 +27,8 @@ while (run) {
             break;
         case 2:
             // Editar cliente
-            console.log("Editar cliente");
+            process = new EditarCliente();
+            process.main();
             break;
         case 3:
             // Excluir cliente

@@ -31,7 +31,9 @@ export default class CadastroDependente implements Cadastro {
         let idTitular = this.entrada.receberNumero("Digite o ID do titular: ");
         let titular = this.armazem.Titulares[idTitular];
 
-        let dependente = new Dependente(nome, nomeSocial, dataNascimento, dataCadastro, titular.Endereco, titular.Documentos, titular.Telefones, titular);
+        let dependente = new Dependente(nome, nomeSocial, dataNascimento, dataCadastro, titular.Endereco, documentos, titular.Telefones, titular);
+
+        titular.Dependentes.push(dependente);
 
         return dependente;
     }

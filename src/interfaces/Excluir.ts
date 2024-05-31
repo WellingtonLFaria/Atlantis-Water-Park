@@ -1,3 +1,3 @@
 export default interface Excluir {
-    excluir(): any;
+    excluir(): void;
 }
