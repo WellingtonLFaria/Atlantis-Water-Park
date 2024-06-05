@@ -5,6 +5,7 @@ import MainMenu from "./menus/MainMenu";
 import CadastrarCliente from "./processes/CadastrarCliente";
 import EditarCliente from "./processes/EditarCliente";
 import ExcluirCliente from "./processes/ExcluirCliente";
+import ListagemAcomodacoes from "./processes/ListagemAcomodacoes";
 import ListarCliente from "./processes/ListarCliente";
 
 
@@ -39,6 +40,10 @@ while (run) {
             // Listar cliente
             process = new ListarCliente();
             process.main();
+            break;
+        case 5:
+            process = new ListagemAcomodacoes();
+            process.listar();
             break;
         case 0:
             // Sair
