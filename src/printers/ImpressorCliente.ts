@@ -1,4 +1,5 @@
 import Cliente from "../abstractions/Cliente";
+import ImpressorAcomodacao from "./ImpressorAcomodacao";
 import ImpressorDocumento from "./ImpressorDocumento";
 import ImpressorEndereco from "./ImpressorEndereco";
 import ImpressorTelefone from "./ImpressorTelefone";
@@ -26,5 +27,7 @@ export default class ImpressorCliente {
                 this.impressorDocumento.imprimir(documento, cliente.Documentos.indexOf(documento));
             });
         }
+        console.log("Acomodação");
+        new ImpressorAcomodacao(cliente.Acomodacao).imprimir();
     }
 }
