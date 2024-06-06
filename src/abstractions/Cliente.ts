@@ -1,3 +1,4 @@
+import Acomodacao from "../entities/Acomodacao";
 import Documento from "../entities/Documento";
 import Endereco from "../entities/Endereco";
 import Telefone from "../entities/Telefone";
@@ -10,8 +11,9 @@ export default abstract class Cliente {
     private endereco: Endereco;
     private documentos: Documento[];
     private telefones: Telefone[];
+    private acomodacao: Acomodacao;
 
-    constructor(nome: string, nomeSocial: string, dataNascimento: Date, dataCadastro: Date, endereco: Endereco, documentos: Documento[], telefones: Telefone[]) {
+    constructor(nome: string, nomeSocial: string, dataNascimento: Date, dataCadastro: Date, endereco: Endereco, documentos: Documento[], telefones: Telefone[], acomodacao: Acomodacao) {
         this.nome = nome;
         this.nomeSocial = nomeSocial;
         this.dataNascimento = dataNascimento;
@@ -19,8 +21,9 @@ export default abstract class Cliente {
         this.endereco = endereco;
         this.documentos = documentos;
         this.telefones = telefones;
+        this.acomodacao = acomodacao;
     }
-    
+
     get Nome(): string {
         return this.nome;
     }
@@ -76,4 +79,8 @@ export default abstract class Cliente {
     set Telefones(telefones: Telefone[]) {
         this.telefones = telefones;
     }
+
+    get Acomodacao(): Acomodacao { return this.acomodacao }
+
+    set Acomodacao(acomodacao: Acomodacao) { this.Acomodacao = acomodacao }
 }

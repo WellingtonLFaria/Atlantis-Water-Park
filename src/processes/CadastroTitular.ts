@@ -1,3 +1,10 @@
+import DiretorCasalSimples from "../diretores/DiretorCasalSimples";
+import DiretorFamiliaMais from "../diretores/DiretorFamiliaMais";
+import DiretorFamiliaSimples from "../diretores/DiretorFamiliaSimples";
+import DiretorFamiliaSuper from "../diretores/DiretorFamiliaSuper";
+import DiretorSolteiroMais from "../diretores/DiretorSolteiroMais";
+import DiretorSolteiroSimples from "../diretores/DiretorSolteiroSimples";
+import Acomodacao from "../entities/Acomodacao";
 import Documento from "../entities/Documento";
 import Telefone from "../entities/Telefone";
 import Titular from "../entities/Titular";
@@ -6,6 +13,7 @@ import Input from "../io/Input";
 import CadastroDocumento from "./CadastroDocumento";
 import CadastroEndereco from "./CadastroEndereco";
 import CadastroTelefone from "./CadastroTelefone";
+import ListagemAcomodacoes from "./ListagemAcomodacoes";
 
 export default class CadastroTitular implements Cadastro {
     private entrada: Input = new Input();
@@ -37,10 +45,46 @@ export default class CadastroTitular implements Cadastro {
             documentos.push(documento);
         }
 
-        let titular = new Titular(nome, nomeSocial, dataNascimento, dataCadastro, endereco, documentos, telefones, []);
+        let acomodacao = new DiretorSolteiroSimples().construir();
+        let run: boolean = true;
+        while (run) {
+            new ListagemAcomodacoes().listar();
+            let opcao = this.entrada.receberNumero("Selecione a acomodação desejada: ");
+            switch (opcao) {
+                case 0:
+                    acomodacao = new DiretorSolteiroSimples().construir();
+                    run = false;
+                    break;
+                case 1:
+                    acomodacao = new DiretorSolteiroMais().construir();
+                    run = false;
+                    break;
+                case 2:
+                    acomodacao = new DiretorCasalSimples().construir();
+                    run = false;
+                    break;
+                case 3:
+                    acomodacao = new DiretorFamiliaSimples().construir();
+                    run = false;
+                    break;
+                case 4:
+                    acomodacao = new DiretorFamiliaMais().construir();
+                    run = false;
+                    break;
+                case 5:
+                    acomodacao = new DiretorFamiliaSuper().construir();
+                    run = false;
+                    break;
+                default:
+                    console.log("Opção inválida!")
+            }
+        }
+
+
+        let titular = new Titular(nome, nomeSocial, dataNascimento, dataCadastro, endereco, documentos, telefones, acomodacao, []);
 
         console.log("Titular cadastrado com sucesso");
 
         return titular;
-    } 
+    }
 }
