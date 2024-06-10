@@ -91,31 +91,29 @@ export default function CadastrarCliente() {
 
                     <Secao>
                         <FormSubtitulo>Telefones</FormSubtitulo>
-                        <form onSubmit={e => handleSubmitTelefone(e)}>
+                        <Field>
+                            <label htmlFor="ddd">DDD:</label>
+                            <InputText name="ddd" state={ddd} setState={setDdd} />
+                        </Field>
+                        <Field>
+                            <label htmlFor="numero">Número:</label>
+                            <InputText name="numero" state={numero} setState={setNumero} />
+                        </Field>
+                        <Field className="items-center">
+                            <Button tipo="submit" onClick={() => { }}>Cadastrar telefone</Button>
+                        </Field>
+                        <Field>
+                            <p>Telefones cadastrados:</p>
                             <Field>
                                 <label htmlFor="ddd">DDD:</label>
-                                <InputText name="ddd" state={ddd} setState={setDdd} />
+                                <InputText name="ddd" state={"12"} setState={() => { }} />
                             </Field>
                             <Field>
                                 <label htmlFor="numero">Número:</label>
-                                <InputText name="numero" state={numero} setState={setNumero} />
+                                <InputText name="numero" state={"996680123"} setState={() => { }} />
                             </Field>
-                            <Field className="items-center">
-                                <Button tipo="submit" onClick={() => { }}>Cadastrar telefone</Button>
-                            </Field>
-                        </form>
-                        <Field>
-                            {telefones?.length === 0 && <p>Nenhum telefone cadastrado</p>}
-                            {telefones?.length !== 0 && telefones.map(telefone => {
-                                return (
-                                    <Field>
-                                        <InputText name="ddd" state={telefone.Ddd} setState={() => { }} />
-                                    </Field>
-                                )
-                            })}
                         </Field>
                     </Secao>
-
                     <Secao>
                         <FormSubtitulo>Endereço</FormSubtitulo>
                         <Field>
@@ -143,6 +141,9 @@ export default function CadastrarCliente() {
                             <InputText name="codigoPostal" state={codigoPostal} setState={setCodigoPostal} />
                         </Field>
                     </Secao>
+                    <Field className="items-center">
+                        <Button onClick={() => { }} tipo="submit">Cadastrar cliente</Button>
+                    </Field>
                 </Form>
             </main>
         </Page>

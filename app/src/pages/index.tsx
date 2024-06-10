@@ -8,7 +8,7 @@ export default function Home() {
             <Navbar />
             <main className="flex flex-col justify-center items-center h-full px-5">
                 <h1 className="text-6xl">Atlantis Water Park</h1>
-                <h2 className="text-4xl">Gerenciador parques aquáticos, clubes e hotéis</h2>
+                <h2 className="text-4xl">Gerenciador de parques aquáticos, clubes e hotéis</h2>
             </main>
         </Page>
     );
