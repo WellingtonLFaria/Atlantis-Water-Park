@@ -50,7 +50,7 @@ export default function CadastrarCliente() {
     const [titular, setTitular] = useState<string>("");
 
     // Acomodação
-    const [acomodacao, setAcomodacao] = useState<string>("");
+    const [acomodacao, setAcomodacao] = useState<string>("SS");
     const acomodacoes = [{ value: "SS", label: "Solteiro Simples" }, { value: "SM", label: "Solteiro Mais" }, { value: "CS", label: "Casal Simples" }, { value: "FS", label: "Família Simples" }, { value: "FM", label: "Família Mais" }, { value: "FSS", label: "Família Super" }]
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
