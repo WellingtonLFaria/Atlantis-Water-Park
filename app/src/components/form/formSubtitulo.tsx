@@ -5,6 +5,6 @@ type Props = {
 
 export default function FormSubtitulo({ className, children }: Props) {
     return (
-        <h2 className={`text-xl text-neutral-700 ${className}`}>{children}</h2>
+        <h2 className={`text-xl text-neutral-700 font-bold ${className}`}>{children}</h2>
     );
 }

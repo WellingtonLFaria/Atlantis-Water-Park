@@ -1,5 +1,5 @@
 import "@/app/globals.css";
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import Navbar from "@/components/navbar";
 import Titulo from "@/components/titulo";
 import Page from "@/components/page";
@@ -8,10 +8,14 @@ import Form from "@/components/form";
 import InputText from "@/components/form/inputs/text";
 import InputRadio from "@/components/form/inputs/radio";
 import InputDate from "@/components/form/inputs/date";
+import InputSelect from "@/components/form/inputs/select";
 import FormSubtitulo from "@/components/form/formSubtitulo";
 import Secao from "@/components/form/secao";
 import Telefone from "@/modelos/Telefone";
 import Button from "@/components/button";
+import Documento from "@/modelos/Documento";
+import { TipoDocumento } from "@/modelos/TipoDocumento";
+import Acomodacao from "@/components/acomodacao";
 
 export default function CadastrarCliente() {
 
@@ -26,7 +30,13 @@ export default function CadastrarCliente() {
     // Telefones
     const [ddd, setDdd] = useState<string>("");
     const [numero, setNumero] = useState<string>("");
-    const [telefones, setTelefones] = useState<Telefone[]>([]);
+    const [telefones, setTelefones] = useState<Telefone[]>([new Telefone("12", "996680124")]);
+
+    // Documentos
+    const [tipoDocumento, setTipoDocumento] = useState<string>("");
+    const [numeroDocumento, setNumeroDocumento] = useState<string>("");
+    const [dataExpedicao, setDataExpedicao] = useState<string>("");
+    const [documentos, setDocumentos] = useState<Documento[]>([new Documento(TipoDocumento.CPF, "12345678913", new Date())]);
 
     // Endereço
     const [rua, setRua] = useState<string>("");
@@ -36,18 +46,50 @@ export default function CadastrarCliente() {
     const [pais, setPais] = useState<string>("");
     const [codigoPostal, setCodigoPostal] = useState<string>("");
 
-    const onChangeRadio = (value: string) => {
-        setCliente(value);
-    }
+    // Titular
+    const [titular, setTitular] = useState<string>("");
+
+    // Acomodação
+    const [acomodacao, setAcomodacao] = useState<string>("");
+    const acomodacoes = [{ value: "SS", label: "Solteiro Simples" }, { value: "SM", label: "Solteiro Mais" }, { value: "CS", label: "Casal Simples" }, { value: "FS", label: "Família Simples" }, { value: "FM", label: "Família Mais" }, { value: "FSS", label: "Família Super" }]
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        let cadastro = true;
+
+        let naoNulos: any[];
+        if (cliente === "titular") { naoNulos = [nome, nomeSocial, dataNascimento, telefones, documentos, rua, bairro, cidade, estado, pais, codigoPostal, acomodacao] }
+        else { naoNulos = [nome, nomeSocial, dataNascimento, documentos, titular] }
+
+        console.log(naoNulos);
+
+        naoNulos.forEach(naoNulo => {
+            if (typeof naoNulo === "string") {
+                if (naoNulo === "") {
+                    cadastro = false;
+                }
+            } else {
+                if (naoNulo.length === 0) {
+                    cadastro = false;
+                }
+            }
+        });
+
+        if (!cadastro) {
+            alert("Preencha todos os campos");
+            return;
+        }
+
+        alert("Cliente cadastrado com sucesso!")
+        return;
     };
 
-    const handleSubmitTelefone = (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        const telefone = new Telefone(ddd, numero);
-        setTelefones([...telefones, telefone]);
+    async function copyTextToClipboard(text: string) {
+        if ('clipboard' in navigator) {
+            return await navigator.clipboard.writeText(text);
+        } else {
+            return document.execCommand('copy', true, text);
+        }
     }
 
     return (
@@ -88,59 +130,102 @@ export default function CadastrarCliente() {
                             <InputDate name="dataNascimento" state={dataNascimento} setState={setDataNascimento} />
                         </Field>
                     </Secao>
-
                     <Secao>
-                        <FormSubtitulo>Telefones</FormSubtitulo>
+                        <FormSubtitulo>Documentos</FormSubtitulo>
                         <Field>
-                            <label htmlFor="ddd">DDD:</label>
-                            <InputText name="ddd" state={ddd} setState={setDdd} />
+                            <label htmlFor="tipoDocumento">Tipo do documento:</label>
+                            <InputSelect name="tipoDocumento" options={[{ value: "RG", label: "Registro Geral" }, { value: "CPF", label: "Cadastro de Pessoas Físicas" }, { value: "PASSPORTE", label: "Passaporte" }]} state={tipoDocumento} setState={setTipoDocumento} />
                         </Field>
                         <Field>
                             <label htmlFor="numero">Número:</label>
-                            <InputText name="numero" state={numero} setState={setNumero} />
+                            <InputText name="numero" state={numeroDocumento} setState={setNumeroDocumento} />
+                        </Field>
+                        <Field>
+                            <label htmlFor="dataExpedicao">Data de expedição:</label>
+                            <InputDate name="dataExpedicao" state={dataExpedicao} setState={setDataExpedicao} />
                         </Field>
                         <Field className="items-center">
-                            <Button tipo="submit" onClick={() => { }}>Cadastrar telefone</Button>
+                            <Button tipo="submit" type="button" onClick={() => { }}>Cadastrar documento</Button>
                         </Field>
                         <Field>
-                            <p>Telefones cadastrados:</p>
-                            <Field>
-                                <label htmlFor="ddd">DDD:</label>
-                                <InputText name="ddd" state={"12"} setState={() => { }} />
-                            </Field>
-                            <Field>
-                                <label htmlFor="numero">Número:</label>
-                                <InputText name="numero" state={"996680123"} setState={() => { }} />
+                            <p>Documentos cadastrados:</p>
+                            <Field flexCol={false}>
+                                <p className="bg-sky-200 p-1 rounded hover:scale-105 transition-all" onClick={e => copyTextToClipboard("12345678912")}><span className="font-bold">CPF:</span> {"12345678912"}</p>
                             </Field>
                         </Field>
                     </Secao>
-                    <Secao>
-                        <FormSubtitulo>Endereço</FormSubtitulo>
-                        <Field>
-                            <label htmlFor="rua">Rua: </label>
-                            <InputText name="rua" state={rua} setState={setRua} />
-                        </Field>
-                        <Field>
-                            <label htmlFor="bairro">Bairro: </label>
-                            <InputText name="bairro" state={bairro} setState={setBairro} />
-                        </Field>
-                        <Field>
-                            <label htmlFor="cidade">Cidade: </label>
-                            <InputText name="cidade" state={cidade} setState={setCidade} />
-                        </Field>
-                        <Field>
-                            <label htmlFor="estado">Estado: </label>
-                            <InputText name="estado" state={estado} setState={setEstado} />
-                        </Field>
-                        <Field>
-                            <label htmlFor="pais">País: </label>
-                            <InputText name="pais" state={pais} setState={setPais} />
-                        </Field>
-                        <Field>
-                            <label htmlFor="codigoPostal">Código Postal: </label>
-                            <InputText name="codigoPostal" state={codigoPostal} setState={setCodigoPostal} />
-                        </Field>
-                    </Secao>
+
+                    {/* Titular */}
+                    {cliente === "titular" &&
+                        <>
+                            <Secao>
+                                <FormSubtitulo>Telefones</FormSubtitulo>
+                                <Field>
+                                    <label htmlFor="ddd">DDD:</label>
+                                    <InputText name="ddd" state={ddd} setState={setDdd} />
+                                </Field>
+                                <Field>
+                                    <label htmlFor="numero">Número:</label>
+                                    <InputText name="numero" state={numero} setState={setNumero} />
+                                </Field>
+                                <Field className="items-center">
+                                    <Button tipo="submit" type="button" onClick={() => { }}>Cadastrar telefone</Button>
+                                </Field>
+                                <Field>
+                                    <p>Telefones cadastrados:</p>
+                                    <Field flexCol={false}>
+                                        <p className="bg-sky-200 p-1 rounded hover:scale-105 transition-all" onClick={e => copyTextToClipboard("(12) 99668-0124")}>({"12"}) {"996680124"}</p>
+                                    </Field>
+                                </Field>
+                            </Secao>
+                            <Secao>
+                                <FormSubtitulo>Endereço</FormSubtitulo>
+                                <Field>
+                                    <label htmlFor="rua">Rua: </label>
+                                    <InputText name="rua" state={rua} setState={setRua} />
+                                </Field>
+                                <Field>
+                                    <label htmlFor="bairro">Bairro: </label>
+                                    <InputText name="bairro" state={bairro} setState={setBairro} />
+                                </Field>
+                                <Field>
+                                    <label htmlFor="cidade">Cidade: </label>
+                                    <InputText name="cidade" state={cidade} setState={setCidade} />
+                                </Field>
+                                <Field>
+                                    <label htmlFor="estado">Estado: </label>
+                                    <InputText name="estado" state={estado} setState={setEstado} />
+                                </Field>
+                                <Field>
+                                    <label htmlFor="pais">País: </label>
+                                    <InputText name="pais" state={pais} setState={setPais} />
+                                </Field>
+                                <Field>
+                                    <label htmlFor="codigoPostal">Código Postal: </label>
+                                    <InputText name="codigoPostal" state={codigoPostal} setState={setCodigoPostal} />
+                                </Field>
+                            </Secao>
+                            <Secao>
+                                <FormSubtitulo>Acomodação</FormSubtitulo>
+                                <InputSelect name="acomodacao" state={acomodacao} setState={setAcomodacao} options={acomodacoes} />
+                                <div className="flex justify-center p-2">
+                                    <Acomodacao acomodacao={acomodacao} />
+                                </div>
+                            </Secao>
+                        </>
+                    }
+
+                    {/* Dependente */}
+                    {cliente === "dependente" &&
+                        <>
+                            <Secao>
+                                <FormSubtitulo>Titular</FormSubtitulo>
+                                <Field>
+                                    <InputSelect name="titular" state={titular} setState={setTitular} options={[{ value: "12345678913", label: "12345678913" }]}></InputSelect>
+                                </Field>
+                            </Secao>
+                        </>
+                    }
                     <Field className="items-center">
                         <Button onClick={() => { }} tipo="submit">Cadastrar cliente</Button>
                     </Field>
