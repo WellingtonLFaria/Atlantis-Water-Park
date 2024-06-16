@@ -64,20 +64,24 @@ export default function Acomodacao({ acomodacao }: Props) {
     }
     return (
         <table className="border-2">
-            <tr>
-                <th className="p-1 border-2">Cama Solteiro</th>
-                <th className="p-1 border-2">Cama Casal</th>
-                <th className="p-1 border-2">Suíte</th>
-                <th className="p-1 border-2">Climatização</th>
-                <th className="p-1 border-2">Garagem</th>
-            </tr>
-            <tr className="text-center">
-                <td className="p-1 border-2">{acomodacaoInfo.camaSolteiro}</td>
-                <td className="p-1 border-2">{acomodacaoInfo.camaCasal}</td>
-                <td className="p-1 border-2">{acomodacaoInfo.suíte}</td>
-                <td className="p-1 border-2">{acomodacaoInfo.climatizacao}</td>
-                <td className="p-1 border-2">{acomodacaoInfo.garagem}</td>
-            </tr>
+            <thead>
+                <tr>
+                    <th className="p-1 border-2">Cama Solteiro</th>
+                    <th className="p-1 border-2">Cama Casal</th>
+                    <th className="p-1 border-2">Suíte</th>
+                    <th className="p-1 border-2">Climatização</th>
+                    <th className="p-1 border-2">Garagem</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr className="text-center">
+                    <td className="p-1 border-2">{acomodacaoInfo.camaSolteiro}</td>
+                    <td className="p-1 border-2">{acomodacaoInfo.camaCasal}</td>
+                    <td className="p-1 border-2">{acomodacaoInfo.suíte}</td>
+                    <td className="p-1 border-2">{acomodacaoInfo.climatizacao}</td>
+                    <td className="p-1 border-2">{acomodacaoInfo.garagem}</td>
+                </tr>
+            </tbody>
         </table>
     );
 }
