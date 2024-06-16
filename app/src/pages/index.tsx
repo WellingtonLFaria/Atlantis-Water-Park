@@ -4,7 +4,7 @@ import Page from "@/components/page";
 
 export default function Home() {
     return (
-        <Page>
+        <Page className="h-screen">
             <Navbar />
             <main className="flex flex-col justify-center items-center h-full px-5">
                 <h1 className="text-6xl">Atlantis Water Park</h1>
