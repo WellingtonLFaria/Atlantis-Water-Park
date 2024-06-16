@@ -1,16 +1,18 @@
-# Atlantis Water Park
+# Atividade 4
 
-## Onde estão as atvidades:
+A atividade 4 é um protótipo navegável da plataforma Atlantis Water Park.
 
-Cada atividade está em sua respectiva branch.
+## Como rodar?
 
-Branches:
-- atvi
-- atvii
-- atviii
-- atviv
-- atvv
+Primeiro é acessar o diretório app e instalar as dependências do projeto:
 
-A pasta docs a desta branch contém todas as propostas das atividades que estão nas outras branchs.
+```bash
+cd app
+npm i
+```
 
-**As instruções para execução de cada atividade estará no README de sua respectiva branch!**
+Para então rodar a aplicação:
+
+```bash
+npm run dev
+```
