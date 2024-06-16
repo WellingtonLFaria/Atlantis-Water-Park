@@ -1,18 +1,21 @@
-# Atividade 4
-
-A atividade 4 é um protótipo navegável da plataforma Atlantis Water Park.
+# Atividade 3
 
 ## Como rodar?
 
-Primeiro é acessar o diretório app e instalar as dependências do projeto:
+Primeiro é necessário instalar as dependências do projeto:
 
 ```bash
-cd app
-npm i
+npm i 
+```
+
+Logo em seguida compilar o código typescript:
+
+```bash
+npx tsc
 ```
 
 Para então rodar a aplicação:
 
 ```bash
-npm run dev
+npm start
 ```
