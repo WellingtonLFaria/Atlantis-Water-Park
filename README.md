@@ -16,3 +16,6 @@ Para então rodar a aplicação:
 ```bash
 npm run dev
 ```
+
+A o protótipo estará rodando no seguinte endereço:
+http://localhost:3000
